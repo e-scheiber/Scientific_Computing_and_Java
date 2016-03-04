@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project name="proiect" basedir="." default="ToJar" > 
+   
+  <property name="package" value="mathlib" />
+  
+  <property name="lib.dir" value="lib"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="dist.name" value="mathlib"/>
+  
+  <path id="pathref">
+     <fileset dir="${lib.dir}">
+       <include name="*.jar"/>
+     </fileset> 
+     <pathelement path="${build.dir}"/>
+  </path>
+  
+  <target name="Init">
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}"/>
+  </target>
+  
+  <target name="Compile" depends="Init" description="compile" >
+     <javac srcdir="src/${package}" 
+          destdir="${build.dir}" 
+          includeantruntime="false">
+        <classpath refid="pathref" /> 
+     </javac>
+  </target>
+  
+  <target name="ToJar" depends="Compile">
+    <copy todir="${build.dir}">
+       <fileset dir="src"/>
+    </copy>   
+    <jar destfile="${dist.dir}/${dist.name}.jar" basedir="${build.dir}"/>
+  </target>
+  
+  <target name="docs">
+    <delete dir="docs" />
+    <mkdir dir="docs" />
+    <javadoc destdir="docs" sourcepath="src" />
+  </target>
+</project>

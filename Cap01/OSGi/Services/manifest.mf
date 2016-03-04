@@ -1,0 +1,7 @@
+Bundle-Name: Mathlib Service
+Bundle-Description: Mathlib Service
+Bundle-Version: 1.0.0
+Bundle-Activator: Activator
+Bundle-Classpath: .,lib/mathlib.jar
+Import-Package: org.osgi.framework
+Export-Package: mathlib.client.cvadra;version="1.0.0",mathlib.client.ecalg;version="1.0.0"

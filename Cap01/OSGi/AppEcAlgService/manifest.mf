@@ -1,0 +1,5 @@
+Bundle-Name: AppEcAlg
+Bundle-Description: Rezolvarea unei ecuatii algebrice
+Bundle-Version: 1.0.0
+Bundle-Activator: Activator
+Import-Package: org.osgi.framework,mathlib.client.ecalg

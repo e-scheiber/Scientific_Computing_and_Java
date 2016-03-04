@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Cmmdc WebSocket</title>
+
+    <script language="javascript" type="text/javascript">
+      var websocket;
+      
+      function init() {
+        output = document.getElementById("result");
+      } 
+      
+      function send() {  
+        var svar=document.cvadra.svar.value;
+        var expr=document.cvadra.expr.value;
+        var a=document.cvadra.a.value;
+        var b=document.cvadra.b.value;
+        var eps=document.cvadra.eps.value;
+        var nmi=document.cvadra.nmi.value;
+        var msg=svar+":"+expr+":"+x+":"+eps+":"+nmi;   
+        var wsUri = "ws://localhost:8080/IntegralaWebSocketParam/cvadra/"+msg;
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function(evt) { onOpen(evt) };
+        websocket.onmessage = function(evt) { onMessage(evt) };
+        websocket.onerror = function(evt) { onError(evt) };
+        websocket.onclose = function(evt) { onClose(evt) };       
+        //websocket.send(msg);   
+        //writeToScreen("SENT: " + msg);
+      }
+           
+      function onOpen(evt) {
+        writeToScreen("CONNECTED");
+      }
+
+      function onMessage(evt) {
+        writeToScreen("RECEIVED: " + evt.data);
+      }
+
+      function onError(evt) {
+        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+      }
+      
+      function onClose(evt) {
+        writeToScreen("CLOSED");
+      }
+      
+      function myclose(){
+        websocket.close();
+      }
+      
+      function writeToScreen(message) {   
+        var pre = document.createElement("p");
+        pre.style.wordWrap = "break-word";
+        pre.innerHTML = message;
+        output.appendChild(pre);
+      }
+
+      window.addEventListener("load", init, false);
+    </script>
+  </head>
+  <body bgcolor="#bbccbb">
+    <center>
+    <h1> Pagina de apelare a servlet-ului MetodaSimpson </h1>
+    <p> <h3> Calculul unei integrale </h3>
+    <p>Introduceti: 
+      
+    <form name="cvadra">
+      <table border="2" >
+        <tr>
+          <td> Variabila de integrare : </td>
+          <td> <input type="text" name="svar" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Expresia functiei de integrat : </td>
+          <td> <input type="text" name="expr" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Limita inferioara a intervalului : </td>
+          <td> <input type="text" name="a" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Limita superioara a intervalului : </td>
+          <td> <input type="text" name="b" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Toleranta : </td>
+          <td> <input type="text" name="eps" value="1.0e-8" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Numar maxim admis de iteratii : </td>
+          <td> <input type="text" name="nmi" value="50" size=30 required> </td>
+        </tr>
+        <tr>
+          <td align="center"> <input type="submit" value="Calculeaza"> </td>
+          <td>  </td>
+        </tr>
+      </table>
+      <input type="hidden" name="tip" value="text/html" >
+    </form>
+    </center>
+  </body>
+</html>

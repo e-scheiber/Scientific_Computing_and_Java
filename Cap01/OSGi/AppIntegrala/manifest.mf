@@ -1,0 +1,6 @@
+Bundle-Name: TestIntegrala
+Bundle-Description: Test Integrala
+Bundle-Version: 1.0.0
+Bundle-Activator: Activator
+Bundle-Classpath: .,lib/mathlib.jar
+Import-Package: org.osgi.framework

@@ -1,0 +1,11 @@
+
+  <servlet>
+    <servlet-name>integ</servlet-name>
+    <servlet-class>integrala.MetodaSimpsonServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>integ</servlet-name>
+    <url-pattern>/integ</url-pattern>
+  </servlet-mapping>
+

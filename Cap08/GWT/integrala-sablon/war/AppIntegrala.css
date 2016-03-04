@@ -1,0 +1,19 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+.button {
+  display: block;
+  font-size: 18pt;
+  color: blue
+}
+
+.label-title {
+  font-weight: bold;
+  font-size: 20pt;
+  color: blue
+}  
+
+.bd{
+    background-color: #bbccbb;
+}

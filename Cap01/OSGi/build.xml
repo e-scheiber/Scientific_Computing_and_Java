@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<project name="mathlib-SimpleApp" default="package" basedir=".">
+	
+	<target name="package">
+		<ant dir="AppEcAlg" target="generate.jar"/>
+		<ant dir="AppEcAlgService" target="generate.jar"/>
+		<ant dir="AppIntegrala" target="generate.jar"/>
+		<ant dir="AppIntegralaService" target="generate.jar"/>
+		<ant dir="Services" target="generate.jar"/>
+	</target>
+
+</project>

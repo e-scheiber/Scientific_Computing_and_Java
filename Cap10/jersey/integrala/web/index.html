@@ -1,0 +1,49 @@
+<html>
+  <body bgcolor="#bbeebb" >
+    <center>
+      <h1> Calculul unei integrale printr-un serviciu RESTfull </h1>
+      <form method="get"
+            action="http://localhost:8080/integrala/resources/integ">
+       <p>Introduce&#355;i</p>
+       <table border="1">
+       <tr>
+         <td> Simbolul variabilei </td>
+         <td> <input type="text" name="svar" size="10" />  
+       </tr> 
+       <tr>
+         <td> Expresia func&#355;iei de integrat </td>
+         <td> <input type="text" name="expr" size="10" />  
+       </tr> 
+       <tr>
+         <td> Extremitatea st&#226;ng&#259; </td>
+         <td> <input type="text" name="a" size="10" />  
+       </tr> 
+       <tr>
+         <td> Extremitatea dreapt&#259; </td>
+         <td> <input type="text" name="b" size="10" />  
+       </tr> 
+       <tr>
+         <td> Num&#259;rul maxim admis de itera&#355;ii </td>
+         <td> <input type="text" name="nmi" size="10" value="50" />  
+       </tr> 
+       <tr>
+         <td> Toleran&#355;a </td>
+         <td> <input type="text" name="eps" size="10" value="1e-6" />  
+       </tr> 
+       <tr>
+         <td> Selecta&#355;i tipul r&#259;spunsului </td>
+         <td>
+            <select name="tip">
+               <option value="text/plain"> Text/Plain </option>
+               <option value="text/html"> Text/Html </option>
+            </select> 
+         </td>
+       </tr>
+       <tr align="center">
+         <td> <input type="submit" value="Calculeaza" /> </td>
+       </tr>
+      </table> 
+      </form>
+    </center>
+    </body>
+</html>

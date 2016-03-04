@@ -1,0 +1,109 @@
+<!doctype html>
+  <head>
+    <title> MatrixEnterForm </title>
+    <script type="text/javascript">
+    <!--
+    function initRequest() {
+      if (window.XMLHttpRequest) {
+          return new XMLHttpRequest();
+      } else if (window.ActiveXObject){
+          return new ActiveXObject("Microsoft.XMLHTTP");
+      }
+    }
+
+    function compute() {
+      var mField=document.getElementById("rows");
+      var nField=document.getElementById("cols");
+      var url = "/jsmatrix/matrix?m=" + 
+         escape(mField.value)+"&n="+escape(nField.value)+"&mat="+escape(array2String());     
+      var req = initRequest();
+      req.onreadystatechange = function() {
+          if (req.readyState == 4) {
+              if (req.status == 200) {
+                  parseMessages(req.responseXML);
+              } else {
+                  alert(req.status+" : "+req.statusText);
+              }
+          }
+      };
+      req.open("get", url, true);
+      req.send(null);
+    }
+
+    function parseMessages(responseXML) {
+      var r = responseXML.getElementsByTagName("rezultat")[0];
+      document.getElementById("rezultat").innerHTML="";
+      for (i=0;i<r.childNodes.length;i++){
+        document.getElementById("rezultat").innerHTML=document.getElementById("rezultat").innerHTML+"<br/>";
+        var row=r.childNodes[i];
+        for (j=0;j<row.childNodes.length;j++){
+           var col=row.getElementsByTagName("col")[j];
+           var t=col.childNodes[0].nodeValue;
+           document.getElementById("rezultat").innerHTML=document.getElementById("rezultat").innerHTML+t+"  ";
+        }
+      }
+    }
+    
+    function templateMatrix(){
+      var rows=document.myForm.rows.value;
+      var cols=document.myForm.cols.value;
+      var myInput="";
+      document.getElementById("matrix").innerHTML="";
+      for(var i=0;i<rows;i++){
+        myInput="<br/>";
+        document.getElementById("matrix").innerHTML=
+          document.getElementById("matrix").innerHTML+myInput;
+        for(var j=0;j<cols;j++){
+          myInput="<input type='number' step='any' name='mat_"+i+"_"+j+"' size='5' id='mat_"+i+"_"+j+"'/>";
+          document.getElementById("matrix").innerHTML=
+            document.getElementById("matrix").innerHTML+myInput;
+        }
+      }
+    }
+    
+    function array2String(){
+      var rows=document.myForm.rows.value;
+      var cols=document.myForm.cols.value;
+      //alert(rows+" "+cols);
+      var x=new Array(rows);   
+      for(var i=0;i<rows;i++){
+        x[i]=new Array(cols)
+        for(var j=0;j<cols;j++){
+          x[i][j]=parseFloat(document.getElementById("mat_"+i+"_"+j).value);
+        }    
+      }  
+      //alert(x.toString());
+      return x.toString();        
+    }
+    //-->
+    </script>
+  </head>
+  <body>
+    <h1> Matrix Enter Form </h1>
+    <br/>
+    <form name="myForm">
+      <table>
+         <tr>
+           <td> Rows </td>
+           <td> <input type="number" id="rows" name="rows" size="10" required min="1"/> </td>
+         </tr>
+         <tr>
+           <td> Columns </td>
+           <td> <input type="number" id="cols" name="cols" size="10" required min="1"/> </td>
+         </tr>
+         <tr>
+           <td></td>
+           <td>
+              <input type="button" onClick="templateMatrix()" 
+                     name="matrix" value="Generate array"/>
+           </td>   
+         </tr>
+         
+      </table>
+		  <div id="matrix"> </div>
+      <p/>
+      <input type="button" value="Calculeaza" onClick="compute()" >  
+    </form>
+    <div id="rezultat"></id>
+  </body>
+</html>

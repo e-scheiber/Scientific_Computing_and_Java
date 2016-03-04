@@ -1,0 +1,35 @@
+<project name="Liniar" default="Run" basedir=".">
+  <property name="build" location="build"/>
+  <property name="src" location="src" />
+
+  <path id="myclasspath">
+    <fileset dir="lib">
+       <include name="*.jar"/>
+    </fileset> 
+    <pathelement path="${build}"/>
+    <!-- <pathelement path="${basedir}"/>-->
+  </path> 
+  
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <delete dir="${build}"/>
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="Compile" depends="init" >
+    <javac srcdir="${src}" destdir="${build}" includeantruntime="false"
+    classpathref="myclasspath"/>
+  </target>
+
+  <target name="Run" depends="Compile">  
+    <java classname="complexplot.Main" classpathref="myclasspath" fork="true"/>
+  </target>
+
+</project>
+
+
+
+
+

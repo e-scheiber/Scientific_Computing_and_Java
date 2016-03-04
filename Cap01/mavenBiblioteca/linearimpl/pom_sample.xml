@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>mathlib.client.linear.impl</groupId>
+  <artifactId>linearimpl</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <name>linearimpl</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.scilab.modules.javasci</groupId>
+      <artifactId>org.scilab.modules.javasci</artifactId>
+      <version>5.5.2</version>
+    </dependency> 
+    <dependency>
+      <groupId>org.scilab.modules.types</groupId>
+      <artifactId>org.scilab.modules.types</artifactId>
+      <version>5.5.2</version>
+    </dependency> 
+    <dependency>
+      <groupId>mathlib.client.linear</groupId>
+      <artifactId>ilinear</artifactId>
+      <version>1.0</version>
+    </dependency>   
+  </dependencies>
+</project>

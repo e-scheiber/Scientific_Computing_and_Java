@@ -1,0 +1,33 @@
+﻿<project name="Socket" default="Run" basedir=".">
+ 
+  <property name="main.class" value="plot2d.Grafic"/>
+  <property name="build.dir" location="build"/>
+  <property name="src.dir" location="src" />
+  
+  <path id="myclasspath">
+    <fileset dir="lib">
+       <include name="*.jar"/>
+    </fileset> 
+    <pathelement path="${build.dir}"/>
+  </path>  
+  
+  <target name="init">
+    <tstamp/>
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+  </target>
+
+  <target name="Compile" depends="init" description="compile the source " >
+    <javac srcdir="src" destdir="${build.dir}" 
+       classpathref="myclasspath"  includeantruntime="false"/>
+  </target>
+
+  <target name="Run" depends="Compile"> 
+    <java classname="${main.class}" classpathref="myclasspath" fork="true"/>
+  </target>
+</project>
+
+
+
+
+

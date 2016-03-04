@@ -1,0 +1,35 @@
+<project name="services" basedir="." default="generate.jar">
+  <property file="../build.properties"/>
+  
+  <path id="myclasspath">
+    <pathelement path="${OSGi}/bin/felix.jar"/>
+    <fileset dir="../lib">
+       <include name="*.jar"/>
+    </fileset>
+  </path> 
+   
+  <target name="init">
+    <delete dir="${dist.dir}"/>
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${dist.dir}" />
+  </target>
+  
+  <target name="compile" depends="init">
+    <javac classpathref="myclasspath"
+           includeantruntime="false"
+           srcdir="src" 
+           destdir="${build.dir}"/>             
+  </target>
+  
+  <target name="generate.jar" depends="compile">
+    <mkdir dir="${build.dir}/lib"/>
+    <copy todir="${build.dir}/lib" >
+       <fileset dir="../lib" />
+    </copy> 
+    
+    <jar destfile="${dist.dir}/${ant.project.name}.jar" 
+      manifest="${manifest.name}.mf" 
+      basedir="${build.dir}"/>
+  </target>
+</project>

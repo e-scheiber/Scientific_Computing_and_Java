@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="Proiect" default="run" basedir=".">
+  <property name="src.dir" value="src"/>
+  <property name="build.dir" value="build"/>
+  
+	<path id="classpath">
+		<pathelement path="${build.dir}" />
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+  
+  <target name="init">
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+  </target>
+  
+	<target name="compile" depends="init">
+		<javac srcdir="src" destdir="${build.dir}" 
+      classpathref="classpath" includeAntRuntime="false"/>		
+	</target>
+  
+  <target name="run" depends="compile">
+		<java classname="ESymja" fork="true">
+			<classpath refid="classpath"/>
+		</java>
+	</target>
+	
+</project>

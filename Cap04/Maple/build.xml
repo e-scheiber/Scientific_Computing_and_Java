@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project name="proiect" basedir="." default="Run" > 
+  <property name="build.dir" value="build"/>
+  <property name="maple-home" location="c:/Program Files/Maple 18" />
+  
+  <path id="pathref">
+     <pathelement path="${build.dir}" />
+     <fileset dir="${maple-home}/java">
+       <include name="*.jar"/>
+    </fileset> 
+  </path>
+  
+  <target name="Init">
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+  </target>
+  
+  <target name="Compile" depends="Init" >
+     <javac srcdir="src" destdir="${build.dir}" 
+        includeantruntime="false">
+        <classpath refid="pathref" /> 
+     </javac>   
+  </target>
+  
+  <target name="Run" depends="Compile" >
+    <java classname="Factor" fork="true">
+       <classpath refid="pathref" /> 
+    </java> 
+    <!--
+    <java classname="Integrate" fork="true">
+       <classpath refid="pathref" /> 
+    </java>
+    --> 
+    <java classname="DiffSolve" fork="true">
+       <classpath refid="pathref" /> 
+    </java>       
+  </target> 
+</project>

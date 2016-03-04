@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project name="graphic2d" basedir="." default="Run" > 
+  <property name="main-class" value="grafic2d.ReprezentareFunctie2D" />
+  <property environment="env"/>
+  
+  <path id="pathref">
+   <fileset dir="../lib">
+       <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${env.J3D_HOME}/lib/ext">
+       <include name="*.jar"/>
+    </fileset>     
+    <pathelement path="classes" /> 
+  </path>
+  
+  <target name="Init">
+     <delete dir="classes"/>
+     <mkdir dir="classes"/>
+  </target>
+     
+  <target name="Compile" depends="Init" description="compile" >
+     <javac srcdir="src" destdir="classes" includeantruntime="false" >
+        <classpath refid="pathref" /> 
+     </javac>
+  </target>
+  
+  <target name="Run" depends="Compile" >
+    <java classname="${main-class}"  fork="true">
+       <classpath refid="pathref" /> 
+    </java>        
+  </target> 
+</project>

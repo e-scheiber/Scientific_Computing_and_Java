@@ -1,0 +1,30 @@
+import com.wolfram.jlink.*;
+public class NIntegrate{
+  public static void main(String[] args){
+    KernelLink ml=null;
+    try{
+      String[] mlArgs = {"-linkmode", "launch", "-linkname", args[0]};
+      ml = MathLinkFactory.createKernelLink(mlArgs);
+    }
+    catch(MathLinkException e){
+      System.out.println("Fatal opening link error : "+e.getMessage());
+      System.exit(1);
+    }
+    try{    
+      ml.discardAnswer(); //f. important
+      ml.evaluate("NIntegrate[Log[1+Tan[x]],{x,0,Pi/4}]");
+      ml.waitForAnswer();
+      Expr result=ml.getExpr();
+      System.out.println(result.toString());
+      
+      //String result=ml.evaluateToOutputForm("NSolve[2^x-x^2==0,x]",0);
+      //System.out.println(result);
+    }  
+    catch(Exception e){
+      System.out.println("MathLinkException : "+e.getMessage());
+    }
+    finally{
+      ml.close();
+    }
+  }
+}

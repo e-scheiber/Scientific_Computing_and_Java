@@ -1,0 +1,6 @@
+<project basedir="." default="generate" name="servlet2osgi" >
+  <target name="generate">
+     <ant dir="karaf" target="generate.jar"/>
+     <ant dir="glassfish" target="generate.jar"/>
+  </target>   
+</project>

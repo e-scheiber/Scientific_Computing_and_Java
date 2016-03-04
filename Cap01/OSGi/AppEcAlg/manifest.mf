@@ -1,0 +1,6 @@
+Bundle-Name: TestEcAlg
+Bundle-Description: Test EcAlg
+Bundle-Version: 1.0.0
+Bundle-Activator: Activator
+Bundle-Classpath: .,lib/mathlib.jar
+Import-Package: org.osgi.framework

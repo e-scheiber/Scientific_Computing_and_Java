@@ -1,0 +1,44 @@
+<!doctype html>
+  <body bgcolor="#bbccbb">
+    <center>
+    <h1> Pagina de apelare a servlet-ului MetodaSimpson </h1>
+    <p> <h3> Calculul unei integrale </h3>
+    <p>Introduceti: 
+      
+    <form method="post"
+          action="/osgi/integ">
+      <table border="2" >
+        <tr>
+          <td> Variabila de integrare : </td>
+          <td> <input type="text" name="svar" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Expresia functiei de integrat : </td>
+          <td> <input type="text" name="expr" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Limita inferioara a intervalului : </td>
+          <td> <input type="text" name="a" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Limita superioara a intervalului : </td>
+          <td> <input type="text" name="b" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Toleranta : </td>
+          <td> <input type="text" name="eps" value="1.0e-8" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Numar maxim admis de iteratii : </td>
+          <td> <input type="text" name="nmi" value="50" size=30 required> </td>
+        </tr>
+        <tr>
+          <td align="center"> <input type="submit" value="Calculeaza"> </td>
+          <td>  </td>
+        </tr>
+      </table>
+      <input type="hidden" name="tip" value="text/html" >
+    </form>
+    </center>
+  </body>
+</html>

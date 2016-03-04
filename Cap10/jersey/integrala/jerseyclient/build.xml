@@ -1,0 +1,27 @@
+<project name="jersey.client" basedir="." default="run">
+  <property name="jersey.home" location="../"/>
+  <property name="package" value="integ"/>
+  
+  <path id="myclasspath">
+    <fileset dir="${jersey.home}/web/WEB-INF/lib">
+       <include name="*.jar"/>
+    </fileset>
+    <pathelement path="${basedir}/classes"/>
+  </path> 
+  
+  <target name="init">
+    <delete dir="classes"/>
+    <mkdir dir="classes"/>
+  </target>
+    
+  <target name="compile" depends="init">
+    <javac classpathref="myclasspath"
+           includeantruntime="false" 
+           srcdir="src" 
+           destdir="classes" />             
+  </target>
+  
+  <target name="run" depends="compile">
+     <java classpathref="myclasspath"  classname="${package}.JerseyClient" fork="true" /> 
+  </target>
+</project>

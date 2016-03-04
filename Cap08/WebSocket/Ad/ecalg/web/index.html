@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>EcalgWebSocketAd</title>
+
+    <script language="javascript" type="text/javascript">
+      var wsUri = "ws://localhost:8080/EcalgWebSocketAd/ecalg";
+      var websocket = new WebSocket(wsUri);
+      websocket.onopen = function(evt) { onOpen(evt) };
+      websocket.onmessage = function(evt) { onMessage(evt) };
+      websocket.onerror = function(evt) { onError(evt) };
+      websocket.onclose = function(evt) { onClose(evt) };       
+      
+      function init() {
+        output = document.getElementById("result");
+      } 
+      
+      function send() {  
+        var svar=document.ecalg.svar.value;
+        var expr=document.ecalg.expr.value;
+        var x=document.ecalg.x.value;
+        var eps=document.ecalg.eps.value;
+        var nmi=document.ecalg.nmi.value;
+        var msg=svar+":"+expr+":"+x+":"+eps+":"+nmi+":html";   
+        websocket.send(msg);   
+        writeToScreen("SENT: " + msg);
+      }
+           
+      function onOpen(evt) {
+        writeToScreen("CONNECTED");
+      }
+
+      function onMessage(evt) {
+        writeToScreen("RECEIVED: " + evt.data);
+      }
+
+      function onError(evt) {
+        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+      }
+      
+      function onClose(evt) {
+        writeToScreen("CLOSED");
+      }
+      
+      function myclose(){
+        websocket.close();
+      }
+      
+      function writeToScreen(message) {   
+        var pre = document.createElement("p");
+        pre.style.wordWrap = "break-word";
+        pre.innerHTML = message;
+        output.appendChild(pre);
+      }
+
+      window.addEventListener("load", init, false);
+    </script>
+  </head>
+  <body bgcolor="#bbccbb">
+    <center>
+    <h1> Pagina de apelare a aplica&#355;iei websocket  MetodaTangentei </h1>
+    <h3> Rezolvarea unei ecua&#355;ii algebrice </h3>
+    <p/>Introduce&#355;i: 
+    <!--<div style="text-align: center;">-->
+    <form name="ecalg">
+      <table border="2" >
+        <tr>
+          <td> Variabila independenta : </td>
+          <td> <input type="text" name="svar" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Membrul stang al ecuatiei : </td>
+          <td> <input type="text" name="expr" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Aproximatia initiala : </td>
+          <td> <input type="text" name="x" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Toleranta : </td>
+          <td> <input type="text" name="eps" value="1.0e-8" size=30 required> </td>
+        </tr>
+        <tr>
+          <td> Numar maxim admis de iteratii : </td>
+          <td> <input type="text" name="nmi" value="50" size=30 required> </td>
+        </tr>
+        <tr>
+          <td>
+             <input type="button" value="Calculeaza" onclick="send()"/> 
+          </td>
+          <td></td>
+        </tr>  
+        <tr>
+          <td>
+             <input type="button" value="Inchide conexiunea" onclick="myclose()"/> 
+          </td>
+          <td></td>
+        </tr> 
+      </table>
+    </form>
+    </div>
+    <div id="result"></div>
+    </center>
+  </body>
+</html>

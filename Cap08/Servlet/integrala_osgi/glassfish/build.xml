@@ -1,0 +1,39 @@
+<project basedir="." default="generate.jar" name="servlet2glassfish" >
+  <property environment="env"/>
+  <property name="dist.name" value="appinteg" />
+  <property name="dist.dir" value="dist" />
+  <property name="build.dir" value="build"/>
+  <property name="manifest.name" value="manifest"/>
+  
+  <path id="myclasspath">
+    <pathelement path="${env.OSGi}/bin/felix.jar"/> 
+    <fileset dir="../lib">
+       <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${env.GLASSFISH.HOME}/glassfish/modules">
+       <include name="*.jar"/>
+    </fileset>
+  </path> 
+   
+  <target name="init">
+    <delete dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}" />
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}" />
+  </target>
+  
+  <target name="compile" depends="init">
+    <javac classpathref="myclasspath"
+           includeantruntime="false"
+           srcdir="../src" 
+           destdir="${build.dir}" />             
+  </target>
+  
+  <target name="generate.jar" depends="compile">
+    <copy todir="${build.dir}" file="index.html"/>
+    <mkdir dir="${build.dir}/lib"/>
+    <copy todir="${build.dir}/lib" file="../lib/mathlib.jar"/>
+    <copy todir="${build.dir}/lib" file="../lib/jep-2.4.1.jar"/>
+    <jar destfile="${dist.dir}/${dist.name}.jar" basedir="${build.dir}"  manifest="../${manifest.name}.mf"  />
+  </target>
+</project>
